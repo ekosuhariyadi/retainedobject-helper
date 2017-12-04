@@ -1,0 +1,126 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+group = GROUP2
+version = VERSION_NAME2
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0-0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api project(path: ':retainedobject-helper')
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation "com.google.dagger:dagger:$dagger2_version"
+    implementation "com.google.dagger:dagger-android:$dagger2_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger2_version" // if you use the support libraries
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+// Create source/javadoc artifacts for publishing
+apply from: "$rootDir/gradle/artifacts.gradle"
+
+// Configure android-maven-gradle-plugin
+install {
+    repositories.mavenInstaller.pom.project {
+        name POM_NAME2
+        description POM_DESCRIPTION2
+        packaging POM_PACKAGING2
+        url POM_URL2
+
+        licenses {
+            license {
+                name POM_LICENCE_NAME2
+                url POM_LICENCE_URL2
+                distribution POM_LICENCE_DIST2
+            }
+        }
+
+        scm {
+            url POM_SCM_URL2
+            connection POM_SCM_CONNECTION2
+            developerConnection POM_SCM_DEV_CONNECTION2
+        }
+
+        developers {
+            developer {
+                id 'EkoSuhariyadi'
+                name 'Eko Suhariyadi'
+            }
+        }
+    }
+}
+
+// Configure gradle-bintray-plugin (for publishing releases)
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+
+    publish = true
+
+    pkg {
+        repo = REPO_NAME2
+        name = POM_NAME2
+        desc = POM_DESCRIPTION2
+        userOrg = REPO_USER2
+        licenses = ['Apache-2.0']
+        labels = ['dagger2', 'architecture-components']
+        websiteUrl = REPO_URL2
+        issueTrackerUrl = REPO_ISSUE_URL2
+        vcsUrl = REPO_GIT_URL2
+        publicDownloadNumbers = true
+
+        version {
+            desc = POM_DESCRIPTION2
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
+}
+
+if (project.hasProperty('bintrayUser') && project.hasProperty('bintrayKey')) {
+    bintray.user = project.bintrayUser
+    bintray.key = project.bintrayKey
+}
+repositories {
+    mavenCentral()
+}

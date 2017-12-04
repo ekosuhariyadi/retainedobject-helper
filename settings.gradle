@@ -1,1 +1,1 @@
-include ':app', ':retainedobject-helper'
+include ':app', ':retainedobject-helper', ':base-dagger-retainedobject'
