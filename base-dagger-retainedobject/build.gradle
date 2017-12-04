@@ -48,6 +48,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
+repositories {
+    mavenCentral()
+}
+
 // Create source/javadoc artifacts for publishing
 apply from: "$rootDir/gradle/artifacts.gradle"
 

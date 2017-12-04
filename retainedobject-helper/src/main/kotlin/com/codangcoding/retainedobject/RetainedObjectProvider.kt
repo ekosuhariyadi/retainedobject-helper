@@ -42,7 +42,7 @@ class RetainedObjectProvider(
         retainedObject = factory.create(clazz)
         retainedObjectStore.put(key, retainedObject)
 
-        return retainedObject as T
+        return retainedObject
     }
 
     open class NewInstanceFactory : Factory {
