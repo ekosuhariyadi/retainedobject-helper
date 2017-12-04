@@ -55,7 +55,7 @@ class RetainedFragment : Fragment() {
                 if (fragment != null && fragment !is RetainedFragment)
                     throw IllegalStateException("Unexpected fragment instance was returned by RETAIN_TAG")
 
-                return fragment as RetainedFragment
+                return fragment as? RetainedFragment
             }
 
             @JvmStatic

@@ -104,7 +104,7 @@ bintray {
         desc = POM_DESCRIPTION2
         userOrg = REPO_USER2
         licenses = ['Apache-2.0']
-        labels = ['dagger2', 'architecture-components']
+        labels = ['dagger2', 'retainedobject']
         websiteUrl = REPO_URL2
         issueTrackerUrl = REPO_ISSUE_URL2
         vcsUrl = REPO_GIT_URL2
