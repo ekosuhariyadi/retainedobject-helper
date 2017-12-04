@@ -98,7 +98,7 @@ bintray {
         desc = POM_DESCRIPTION
         userOrg = REPO_USER
         licenses = ['Apache-2.0']
-        labels = ['dagger2', 'android-arch-viewmodel']
+        labels = ['architecture-components']
         websiteUrl = REPO_URL
         issueTrackerUrl = REPO_ISSUE_URL
         vcsUrl = REPO_GIT_URL
